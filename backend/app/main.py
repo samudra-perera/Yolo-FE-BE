@@ -1,0 +1,25 @@
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+from app.endpoints import predict, health, management, metrics, group
+import time
+
+app = FastAPI()
+
+startup_time = time.time()
+
+# Enable CORS for frontend dev
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Restrict in production
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Route includes
+app.include_router(predict.router)
+app.include_router(health.get_router(startup_time))
+app.include_router(management.router)
+app.include_router(metrics.router)
+app.include_router(group.router)
