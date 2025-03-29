@@ -7,7 +7,9 @@ from ultralytics import YOLO
 import onnxruntime as ort
 import logging
 import json
+import time
 from app.services.onnx_postprocess import format_onnx_predictions
+from app.endpoints.metrics import track_latency
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -58,6 +60,7 @@ async def predict(image: UploadFile = File(...), model: str = Form(default=None)
         )
 
     img = Image.open(image.file).convert("RGB")
+    start = time.time()
 
     if model_filename.endswith(".pt"):
         yolo_model = YOLO(str(model_path))
@@ -72,6 +75,9 @@ async def predict(image: UploadFile = File(...), model: str = Form(default=None)
                 {"label": label, "confidence": confidence, "bbox": [x1, y1, x2, y2]}
             )
 
+        duration_ms = (time.time() - start) * 1000
+        track_latency(duration_ms)
+
         return {"predictions": predictions, "model_used": model_key}
 
     elif model_filename.endswith(".onnx"):
@@ -79,6 +85,10 @@ async def predict(image: UploadFile = File(...), model: str = Form(default=None)
         preprocessed = preprocess_image(img)
         raw_output = predict_onnx(preprocessed, session)
         formatted = format_onnx_predictions(raw_output, model_name=model_key)
+
+        duration_ms = (time.time() - start) * 1000
+        track_latency(duration_ms)
+
         return formatted
 
     else:
