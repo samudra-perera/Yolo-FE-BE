@@ -1,14 +1,16 @@
-import { Separator } from "@/components/ui/separator";
+import { FC } from "react";
+import { Card, CardContent } from "@/components/ui/card";
 
-const Header = () => {
+const Header: FC = () => {
   return (
-    <div className="w-full text-center py-6">
-      <h1 className="text-4xl font-bold">TimsCup Detector</h1>
-      <p className="text-muted-foreground text-lg mt-2">
-        Identify Tim Hortons cups and generic coffee cups using AI
-      </p>
-      <Separator className="mt-4" />
-    </div>
+    <Card className="mt-6 mx-auto max-w-3xl shadow-md rounded-2xl p-6 text-center">
+      <CardContent>
+        <h1 className="text-3xl font-bold">Cup Classifier</h1>
+        <p className="text-muted-foreground mt-2 text-lg">
+          Detects Tim Hortons cups and generic coffee cups using AI
+        </p>
+      </CardContent>
+    </Card>
   );
 };
 
