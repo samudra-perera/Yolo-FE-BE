@@ -1,0 +1,1 @@
+yolov8s_samudra_A100_best_onnx

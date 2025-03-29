@@ -1,0 +1,20 @@
+{
+  "yolov8s_samudra_A100_best_torch": {
+    "model": "yolov8s_samudra_A100_best.pt",
+    "config": {
+      "input_size": [640, 640],
+      "batch_size": 32,
+      "confidence_threshold": 0.25
+    },
+    "date_registered": "2025-03-16"
+  },
+  "yolov8s_samudra_A100_best_onnx": {
+    "model": "yolov8s_samudra_A100_best.onnx",
+    "config": {
+      "input_size": [640, 640],
+      "batch_size": 32,
+      "confidence_threshold": 0.25
+    },
+    "date_registered": "2025-03-28"
+  }
+}
