@@ -8,6 +8,7 @@ import onnxruntime as ort
 import logging
 import json
 import time
+
 from app.services.onnx_postprocess import format_onnx_predictions
 from app.endpoints.metrics import track_latency
 
@@ -76,7 +77,7 @@ async def predict(image: UploadFile = File(...), model: str = Form(default=None)
             )
 
         duration_ms = (time.time() - start) * 1000
-        track_latency(duration_ms)
+        track_latency(duration_ms)  # ✅ Track inference time and update Prometheus
 
         return {"predictions": predictions, "model_used": model_key}
 
@@ -87,7 +88,7 @@ async def predict(image: UploadFile = File(...), model: str = Form(default=None)
         formatted = format_onnx_predictions(raw_output, model_name=model_key)
 
         duration_ms = (time.time() - start) * 1000
-        track_latency(duration_ms)
+        track_latency(duration_ms)  # ✅ Track inference time and update Prometheus
 
         return formatted
 
