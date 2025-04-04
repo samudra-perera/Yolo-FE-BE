@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from prometheus_fastapi_instrumentator import Instrumentator
 from app.endpoints import predict, health, management, metrics, group
+from app.endpoints import evaluate
 import time
 
 app = FastAPI()
@@ -19,6 +20,7 @@ app.add_middleware(
 
 # Route includes
 app.include_router(predict.router)
+app.include_router(evaluate.router)
 app.include_router(health.get_router(startup_time))
 app.include_router(management.router)
 app.include_router(metrics.router)

@@ -1,20 +1,29 @@
 {
-  "yolov8s_samudra_A100_best_torch": {
-    "model": "yolov8s_samudra_A100_best.pt",
+  "best_model_v4": {
+    "model": "best_model_v4.pt",
     "config": {
       "input_size": [640, 640],
-      "batch_size": 32,
+      "batch_size": 1,
       "confidence_threshold": 0.25
     },
-    "date_registered": "2025-03-16"
+    "date_registered": "2025-04-03"
   },
-  "yolov8s_samudra_A100_best_onnx": {
-    "model": "yolov8s_samudra_A100_best.onnx",
+  "best_model_v5": {
+    "model": "best_model_v5.pt",
     "config": {
       "input_size": [640, 640],
-      "batch_size": 32,
+      "batch_size": 1,
       "confidence_threshold": 0.25
     },
-    "date_registered": "2025-03-28"
+    "date_registered": "2025-04-03"
+  },
+  "best_model_v6": {
+    "model": "best_model_v6.pt",
+    "config": {
+      "input_size": [640, 640],
+      "batch_size": 1,
+      "confidence_threshold": 0.25
+    },
+    "date_registered": "2025-04-03"
   }
 }
